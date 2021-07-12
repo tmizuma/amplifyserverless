@@ -1,27 +1,2 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-auroraserverless-dev-05744-authRole",
-      "UnauthRoleArn": "arn:aws:iam::888727018440:role/amplify-auroraserverless-dev-05744-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::888727018440:role/amplify-auroraserverless-dev-05744-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-auroraserverless-dev-05744-deployment",
-      "UnauthRoleName": "amplify-auroraserverless-dev-05744-unauthRole",
-      "StackName": "amplify-auroraserverless-dev-05744",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:888727018440:stack/amplify-auroraserverless-dev-05744/3d041c70-e005-11eb-b9ea-0e71fe807c55"
-    },
-    "categories": {
-      "api": {
-        "serverless": {
-          "rdsRegion": "ap-northeast-1",
-          "rdsClusterIdentifier": "arn:aws:rds:ap-northeast-1:888727018440:cluster:serverless",
-          "rdsSecretStoreArn": "arn:aws:secretsmanager:ap-northeast-1:888727018440:secret:rds-db-credentials/cluster-QKHCWXHA6CEUWUAQDHTP2NOMFM/admin-zT4be8",
-          "rdsDatabaseName": "tamizuma"
-        }
-      },
-      "auth": {
-        "auroraserverlessd141abf4": {}
-      }
-    }
-  }
 }
