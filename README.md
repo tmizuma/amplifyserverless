@@ -25,7 +25,7 @@ SELECT * from Customers WHERE email = 'test@amazon.com';
 ## レコード数のカウント
 SELECT count(1) from Customers;
 ## 複数カラムでの検索
-SELECT * from Customers WHERE age > 10 AND age < 20;
+SELECT * from Customers WHERE age >= 10 AND age <= 20;
 ```
 
 AppSync からこれらの SQL を発行するために以下の`vtl`ファイルを追加しています。
@@ -160,7 +160,7 @@ amplify push
 
 6. マネジメントコンソールから AppSync の動作を確認する
 
-6-1. [マネジメントコンソール](https://ap-northeast-1.console.aws.amazon.com/appsync/home?region=ap-northeast-1#/apis)にアクセスして作成した API(serverless-dev)を選択する。
+6-1. [マネジメントコンソール](https://ap-northeast-1.console.aws.amazon.com/appsync/home?region=ap-northeast-1#/apis)にアクセスし、作成した API(serverless-dev)を選択する。
 
 6-2. 左のナビゲーションバーから「クエリ」を選択して GraphQL のクエリエディタを開く。
 
