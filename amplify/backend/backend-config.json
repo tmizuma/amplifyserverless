@@ -1,0 +1,28 @@
+{
+  "api": {
+    "serverless": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authauroraserverlessd141abf4"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      },
+      "rdsInit": true
+    }
+  },
+  "auth": {
+    "auroraserverlessd141abf4": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

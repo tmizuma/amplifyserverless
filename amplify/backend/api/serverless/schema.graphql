@@ -1,0 +1,47 @@
+input CreateCustomersInput {
+  id: Int!
+  name: String!
+  phone: String!
+  email: String!
+}
+
+type Customers {
+  id: Int!
+  name: String!
+  phone: String!
+  email: String!
+}
+
+input UpdateCustomersInput {
+  id: Int!
+  name: String
+  phone: String
+  email: String
+}
+
+type Mutation {
+  deleteCustomers(id: Int!): Customers
+  createCustomers(createCustomersInput: CreateCustomersInput!): Customers
+  updateCustomers(updateCustomersInput: UpdateCustomersInput!): Customers
+}
+
+type Query {
+  getCustomersByEmail(email: String!): Customers
+  getCustomers(id: Int!): Customers
+  countCustomers: CustomerCount
+  listCustomerss: [Customers]
+}
+
+type Subscription {
+  onCreateCustomers: Customers @aws_subscribe(mutations: ["createCustomers"])
+}
+
+type CustomerCount {
+  count: Int
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "serverless",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authauroraserverlessd141abf4",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
