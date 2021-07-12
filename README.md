@@ -87,6 +87,8 @@ aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless |
 
 Aurora Serverless に接続するためのシークレットを作成します。この操作はクラスタが作成されてから実行してください。
 
+シークレットに保存する値を設定します。
+
 ```bash
 CLUSTER_RESOURCE_ID=$(aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless | jq -r '.DBClusters[].DbClusterResourceId')
 CLUSTER_HOST=$(aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless | jq -r '.DBClusters[].DBClusterArn')
@@ -103,6 +105,8 @@ cat <<-EOF > creds.json
 EOF
 ```
 
+シークレットを作成します。
+
 ```bash
 aws secretsmanager create-secret --name tutorial/amplify-aurora-serverless-secrets --secret-string file://creds.json --region ap-northeast-1
 ```
@@ -112,9 +116,7 @@ aws secretsmanager create-secret --name tutorial/amplify-aurora-serverless-secre
 ```bash
 SECRET_ARN=$(aws secretsmanager describe-secret --secret-id tutorial/amplify-aurora-serverless-secrets | jq -r '.ARN')
 CLUSTER_ARN=$(aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless | jq -r '.DBClusters[].DBClusterArn')
-```
 
-```bash
 aws rds-data execute-statement --resource-arn "$CLUSTER_ARN" --secret-arn "$SECRET_ARN" --sql "create database myaurora;"
 aws rds-data execute-statement --resource-arn "$CLUSTER_ARN" --secret-arn "$SECRET_ARN" --sql "\
 CREATE TABLE myaurora.Customers ( \
@@ -170,6 +172,8 @@ amplify push
 6-1. [マネジメントコンソール](https://ap-northeast-1.console.aws.amazon.com/appsync/home?region=ap-northeast-1#/apis)にアクセスし、作成した API(serverless-dev)を選択する。
 
 6-2. 左のナビゲーションバーから「クエリ」を選択して GraphQL のクエリエディタを開く。
+
+![overview](images/console.png)
 
 6-3. クエリを発行し、動作を確認する。
 
