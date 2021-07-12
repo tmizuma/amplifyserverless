@@ -91,11 +91,9 @@ amplify push
 6. 後片付け
 
 ```bash
-amplify delete
-```
-
-```bash
+aws secretsmanager delete-secret --secret-id tutorial/amplify-aurora-serverless-secrets --force-delete-without-recovery --region ap-northeast-1
 aws rds delete-db-cluster --db-cluster-identifier amplify-aurora-serverless --skip-final-snapshot
+amplify delete
 ```
 
 ## 使用方法
