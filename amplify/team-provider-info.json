@@ -1,2 +1,24 @@
 {
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-auroraserverless-dev-161940-authRole",
+      "UnauthRoleArn": "arn:aws:iam::888727018440:role/amplify-auroraserverless-dev-161940-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::888727018440:role/amplify-auroraserverless-dev-161940-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-auroraserverless-dev-161940-deployment",
+      "UnauthRoleName": "amplify-auroraserverless-dev-161940-unauthRole",
+      "StackName": "amplify-auroraserverless-dev-161940",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:888727018440:stack/amplify-auroraserverless-dev-161940/89fcd7e0-e2e1-11eb-bc93-062bdbc94911"
+    },
+    "categories": {
+      "api": {
+        "serverless": {
+          "rdsRegion": "ap-northeast-1",
+          "rdsClusterIdentifier": "arn:aws:rds:ap-northeast-1:888727018440:cluster:amplify-aurora-serverless",
+          "rdsSecretStoreArn": "arn:aws:secretsmanager:ap-northeast-1:888727018440:secret:tutorial/amplify-aurora-serverless-secrets-4MMXKC",
+          "rdsDatabaseName": "myaurora"
+        }
+      }
+    }
+  }
 }

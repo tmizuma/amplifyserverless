@@ -8,6 +8,7 @@ export const getCustomersByEmail = /* GraphQL */ `
       name
       phone
       email
+      age
     }
   }
 `;
@@ -18,6 +19,7 @@ export const getCustomers = /* GraphQL */ `
       name
       phone
       email
+      age
     }
   }
 `;
@@ -35,6 +37,18 @@ export const listCustomerss = /* GraphQL */ `
       name
       phone
       email
+      age
+    }
+  }
+`;
+export const listCustomersByAgeRange = /* GraphQL */ `
+  query ListCustomersByAgeRange($min: Int!, $max: Int!) {
+    listCustomersByAgeRange(min: $min, max: $max) {
+      id
+      name
+      phone
+      email
+      age
     }
   }
 `;

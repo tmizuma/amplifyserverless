@@ -3,7 +3,7 @@
   "Parameters": {
     "AppSyncApiName": {
       "Type": "String",
-      "Description": "The name of the AppSync API generated from database tamizuma",
+      "Description": "The name of the AppSync API generated from database myaurora",
       "Default": "AppSyncSimpleTransform"
     },
     "env": {
@@ -45,8 +45,8 @@
       "Type": "AWS::AppSync::DataSource",
       "Properties": {
         "Type": "RELATIONAL_DATABASE",
-        "Name": "tamizuma_rds_DataSource",
-        "Description": "RDS Data Source Provisioned for tamizuma",
+        "Name": "myaurora_rds_DataSource",
+        "Description": "RDS Data Source Provisioned for myaurora",
         "ApiId": {
           "Ref": "AppSyncApiId"
         },
@@ -335,6 +335,53 @@
         "RelationalDatabaseDataSource"
       ]
     },
+    "CustomersByAgeRangeResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+          "ApiId": {
+              "Ref": "AppSyncApiId"
+          },
+          "DataSourceName": {
+              "Fn::GetAtt": [
+                  "RelationalDatabaseDataSource",
+                  "Name"
+              ]
+          },
+          "FieldName": "listCustomersByAgeRange",
+          "TypeName": "Query",
+          "RequestMappingTemplateS3Location": {
+              "Fn::Sub": [
+                  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                  {
+                      "S3DeploymentBucket": {
+                          "Ref": "S3DeploymentBucket"
+                      },
+                      "S3DeploymentRootKey": {
+                          "Ref": "S3DeploymentRootKey"
+                      },
+                      "ResolverFileName": "Query.listCustomersByAgeRange.req.vtl"
+                  }
+              ]
+          },
+          "ResponseMappingTemplateS3Location": {
+              "Fn::Sub": [
+                  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                  {
+                      "S3DeploymentBucket": {
+                          "Ref": "S3DeploymentBucket"
+                      },
+                      "S3DeploymentRootKey": {
+                          "Ref": "S3DeploymentRootKey"
+                      },
+                      "ResolverFileName": "Query.listCustomersByAgeRange.res.vtl"
+                  }
+              ]
+          }
+      },
+      "DependsOn": [
+          "RelationalDatabaseDataSource"
+      ]
+  },
     "CustomersUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {

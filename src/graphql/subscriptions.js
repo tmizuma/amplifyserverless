@@ -8,6 +8,7 @@ export const onCreateCustomers = /* GraphQL */ `
       name
       phone
       email
+      age
     }
   }
 `;

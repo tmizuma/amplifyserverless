@@ -3,6 +3,7 @@ input CreateCustomersInput {
   name: String!
   phone: String!
   email: String!
+  age: Int
 }
 
 type Customers {
@@ -10,6 +11,7 @@ type Customers {
   name: String!
   phone: String!
   email: String!
+  age: Int
 }
 
 input UpdateCustomersInput {
@@ -17,6 +19,7 @@ input UpdateCustomersInput {
   name: String
   phone: String
   email: String
+  age: Int
 }
 
 type Mutation {
@@ -30,6 +33,7 @@ type Query {
   getCustomers(id: Int!): Customers
   countCustomers: CustomerCount
   listCustomerss: [Customers]
+  listCustomersByAgeRange(min: Int!, max: Int!): [Customers]
 }
 
 type Subscription {
@@ -38,10 +42,4 @@ type Subscription {
 
 type CustomerCount {
   count: Int
-}
-
-schema {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
 }

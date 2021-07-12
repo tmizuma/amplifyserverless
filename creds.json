@@ -1,0 +1,9 @@
+{
+  "dbInstanceIdentifier": "amplify-aurora-serverless",
+  "engine": "aurora",
+  "resourceId": "cluster-IYSA2U3UQBGWN3CJRVNIGRDWDU",
+  "host": "arn:aws:rds:ap-northeast-1:888727018440:cluster:amplify-aurora-serverless",
+  "port": 3306,
+  "username": "admin",
+  "password": "Passw0rd!"
+}
