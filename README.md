@@ -1,4 +1,10 @@
-# Amplify + AppSync を使って Aurora Serverless に対して複雑なクエリを発行する
+# auroraserverless-complex-query
+
+## Overview
+
+Amplify + AppSync のカスタムリゾルバの機能を使って Aurora Serverless に対して複雑なクエリを発行します。
+
+![overview](images/overview.png)
 
 Amplify CLI の`add-graphql-datasource`コマンドを利用することで、[既存の Aurora Serverless をデータソースとしてプロジェクトに import することができます。](https://docs.amplify.aws/cli/graphql-transformer/relational) この方法を用いることで、AppSync から簡単に Aurora Serverless を呼び出すためのスキーマ(`schema.graphql`)を作成することが可能です。
 
@@ -56,6 +62,7 @@ GraphQL のスキーマ定義は以下の`schema.grapql`を参照してくださ
 ### その他
 
 - Amplify Configure の設定が完了していること
+- Administrator 権限を有していること
 
 ## デプロイ方法
 
@@ -78,7 +85,7 @@ aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless |
 
 2. Secrets Manager の作成
 
-Aurora Serverless に接続するための Secrets Manager を作成します。この操作はクラスタが作成されてから実行してください。
+Aurora Serverless に接続するためのシークレットを作成します。この操作はクラスタが作成されてから実行してください。
 
 ```bash
 CLUSTER_RESOURCE_ID=$(aws rds describe-db-clusters --db-cluster-identifier amplify-aurora-serverless | jq -r '.DBClusters[].DbClusterResourceId')
@@ -100,7 +107,7 @@ EOF
 aws secretsmanager create-secret --name tutorial/amplify-aurora-serverless-secrets --secret-string file://creds.json --region ap-northeast-1
 ```
 
-3. Database、Table の作成
+3. データベース、顧客テーブル の作成
 
 ```bash
 SECRET_ARN=$(aws secretsmanager describe-secret --secret-id tutorial/amplify-aurora-serverless-secrets | jq -r '.ARN')
@@ -166,7 +173,7 @@ amplify push
 
 6-3. クエリを発行し、動作を確認する。
 
-### 顧客を新規登録する
+#### 顧客を新規登録する
 
 ```graphql
 mutation MyMutation {
@@ -188,7 +195,7 @@ mutation MyMutation {
 }
 ```
 
-### Email で顧客を検索する
+#### Email で顧客を検索する
 
 ```graphql
 query MyQuery {
@@ -202,7 +209,7 @@ query MyQuery {
 }
 ```
 
-### 顧客テーブルのレコード数をカウントする
+#### 顧客テーブルのレコード数をカウントする
 
 ```graphql
 query MyQuery {
@@ -212,7 +219,7 @@ query MyQuery {
 }
 ```
 
-### 年齢が 10 歳~30 歳の顧客を検索する
+#### 年齢が 10 歳~30 歳の顧客を検索する
 
 ```graphql
 query MyQuery {
