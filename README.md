@@ -4,7 +4,46 @@ Amplify CLI の`add-graphql-datasource`コマンドを利用することで、[�
 
 ただし、この方法では一つのテーブルに対し単純な CRUD 処理しか実行することができません。テーブルに対しより柔軟なクエリを発行するためには[カスタムリゾルバ](https://docs.amplify.aws/cli/graphql-transformer/resolvers)を作成して、SQL とそれに対応するレスポンスのマッピング処理を定義する必要があります。
 
-本リポジトリでは、より複雑な SQL を発行するためのサンプルを提供します。
+本リポジトリでは、データベース(Aurora MySQL)に以下のような SQL を発行するためのサンプルを提供します。
+
+```sql
+# テーブル定義
+CREATE TABLE myaurora.Customers (
+ id int(11) NOT NULL PRIMARY KEY,
+ name varchar(50) NOT NULL,
+ phone varchar(50) NOT NULL,
+ email varchar(50) NOT NULL,
+ age int(3) NOT NULL,
+ INDEX email_index (email),
+ INDEX age_index (age)
+);
+
+# 発行するSQL
+
+## id以外の条件で検索
+SELECT * from Customers WHERE email = 'test@amazon.com';
+## レコード数のカウント
+SELECT count(1) from Customers;
+## 複数カラムでの検索
+SELECT * from Customers WHERE age > 10 AND age < 20;
+```
+
+AppSync からこれらの SQL を発行するために以下の`vtl`ファイルを追加しています。
+
+- `amplify/backend/api/serverless/resolvers/Query.getCustomersByEmail.req.vtl`
+- `amplify/backend/api/serverless/resolvers/Query.getCustomersByEmail.res.vtl`
+- `amplify/backend/api/serverless/resolvers/Query.countCustomers.req.vtl`
+- `amplify/backend/api/serverless/resolvers/Query.countCustomers.red.vtl`
+- `amplify/backend/api/serverless/resolvers/Query.listCustomersByAgeRange.req.vtl`
+- `amplify/backend/api/serverless/resolvers/Query.listCustomersByAgeRange.res.vtl`
+
+カスタムリゾルバの設定は以下のファイルの`CustomersByEmailGetResolver`、`CountCustomersResolver`、`CustomersByAgeRangeResolver`を参照してください。
+
+- `amplify/backend/api/serverless/stacks/serverless-myaurora-rds.json`
+
+GraphQL のスキーマ定義は以下の`schema.grapql`を参照してください。
+
+- `amplify/backend/api/serverless/schema.graphql`
 
 ## 前提となる環境
 
