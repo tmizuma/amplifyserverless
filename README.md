@@ -1,5 +1,7 @@
 # auroraserverless-complex-query
 
+Amplify CLI を用いてAuroraServerlessに対し複雑なSQLを発行するためのサンプルコードです.
+
 ## Overview
 
 Amplify + AppSync のカスタムリゾルバの機能を使って Aurora Serverless に対して複雑なクエリを発行します。
